@@ -47,11 +47,19 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
   margin: 0;
   background: var(--bg);
+  overflow-x: hidden;
+  width: 100%;
+}
+
+[id] {
+  scroll-margin-top: 76px;
 }
 
 ::selection {
@@ -62,6 +70,9 @@ body {
 .site {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  width: 100%;
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans);
@@ -131,10 +142,12 @@ body {
   border-bottom: 1px solid transparent;
 }
 
-.nav.scrolled {
+.nav.scrolled,
+.nav.is-open {
   background: var(--nav);
   border-bottom-color: var(--line);
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .nav-inner {
@@ -265,6 +278,7 @@ body {
   border: 1px solid var(--line);
   background: var(--card-solid);
   box-shadow: var(--shadow);
+  z-index: 100;
 }
 
 .menu button {
@@ -290,26 +304,68 @@ body {
 
 .mobile-panel {
   display: grid;
-  gap: 4px;
+  gap: 6px;
   max-width: 1180px;
   margin: 0 auto;
-  padding: 0 24px 16px;
+  padding: 10px 16px 18px;
+  animation: mobile-slide 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes mobile-slide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .mobile-panel button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   text-align: left;
-  border: 0;
-  background: transparent;
-  color: var(--muted);
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
   border-radius: 12px;
-  padding: 10px 12px;
+  padding: 11px 14px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.mobile-panel button:active {
+  transform: scale(0.98);
 }
 
 .mobile-panel button[data-active="true"] {
-  background: var(--soft);
+  background: color-mix(in srgb, var(--lime) 15%, var(--card));
+  border-color: color-mix(in srgb, var(--lime) 60%, transparent);
   color: var(--ink);
+}
+
+.mobile-panel-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--lime);
+  color: var(--lime-ink);
+  font-weight: 800;
+  font-size: 14px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(214, 255, 74, 0.25);
+}
+
+.mobile-panel-cta:active {
+  transform: scale(0.98);
 }
 
 .hero {
@@ -917,7 +973,7 @@ body {
   inset: 0;
   background:
     linear-gradient(to top, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.28) 55%, rgba(0, 0, 0, 0.25)),
-    radial-gradient(420px circle at var(--x) var(--y), rgba(214, 255, 74, 0.28), transparent 55%);
+    radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(214, 255, 74, 0.28), transparent 55%);
 }
 
 .project-body {
@@ -1020,6 +1076,8 @@ body {
   font-size: clamp(2rem, 4vw, 3.4rem);
   letter-spacing: -0.06em;
   line-height: 0.9;
+  word-break: break-all;
+  overflow-wrap: anywhere;
 }
 
 .github-banner p {
@@ -1084,8 +1142,11 @@ body {
 }
 
 .contact b {
+  display: block;
   font-size: 16px;
   letter-spacing: -0.03em;
+  word-break: break-all;
+  overflow-wrap: anywhere;
 }
 
 .foot {
@@ -1117,6 +1178,11 @@ body {
   place-items: center;
   cursor: pointer;
   box-shadow: var(--shadow);
+  transition: transform 0.2s;
+}
+
+.top-btn:active {
+  transform: scale(0.92);
 }
 
 .toast {
@@ -1128,25 +1194,32 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 16px;
+  padding: 12px 18px;
   border-radius: 999px;
   background: var(--ink);
   color: var(--bg);
   font-size: 13px;
   font-weight: 750;
+  max-width: calc(100% - 32px);
+  box-shadow: var(--shadow);
+}
+
+@media (min-width: 981px) {
+  .mobile-panel {
+    display: none;
+  }
 }
 
 @media (max-width: 980px) {
   .hero-wrap,
   .about-grid,
-  .projects,
-  .skills,
-  .pillars {
+  .projects {
     grid-template-columns: 1fr;
   }
 
-  .skills {
-    grid-template-columns: 1fr 1fr;
+  .skills,
+  .pillars {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .side-index,
@@ -1161,7 +1234,8 @@ body {
   }
 
   .display {
-    font-size: clamp(3.6rem, 18vw, 6rem);
+    font-size: clamp(2.8rem, 11vw, 4.8rem);
+    line-height: 0.92;
   }
 
   .github-banner,
@@ -1175,27 +1249,312 @@ body {
   }
 }
 
-@media (min-width: 981px) {
-  .mobile-panel {
-    display: none;
-  }
-}
-
 @media (max-width: 640px) {
-  .skills,
-  .stat-grid,
+  .section {
+    padding: 68px 16px;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 88px 16px 40px;
+  }
+
+  .hero-wrap {
+    gap: 32px;
+  }
+
+  .display {
+    font-size: clamp(2.3rem, 11vw, 3.4rem);
+    letter-spacing: -0.05em;
+  }
+
+  .lede {
+    font-size: 15px;
+    margin-top: 18px;
+    line-height: 1.6;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .h2 {
+    font-size: clamp(1.9rem, 7.5vw, 2.6rem);
+    line-height: 1.05;
+  }
+
+  .panel {
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+
+  .quote {
+    font-size: 17px;
+    padding-left: 12px;
+    margin-bottom: 16px;
+  }
+
+  .bio {
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+
+  .dossier {
+    border-radius: 22px;
+  }
+
+  .dossier-in {
+    padding: 18px 16px;
+    border-radius: 21px;
+  }
+
+  .dossier h2 {
+    font-size: 24px;
+    margin: 20px 0 4px;
+  }
+
+  .dossier-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 18px 0;
+    padding-top: 14px;
+    text-align: center;
+  }
+
+  .dossier-stats strong {
+    font-size: 22px;
+  }
+
+  .dossier-stats span {
+    display: block;
+    font-size: 9.5px;
+    letter-spacing: 0.02em;
+    word-break: break-word;
+    margin-top: 3px;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .stat {
+    padding: 14px 12px;
+    min-height: 110px;
+    border-radius: 18px;
+  }
+
+  .stat b {
+    font-size: 32px;
+  }
+
+  .stat span {
+    font-size: 10.5px;
+    word-break: break-word;
+  }
+
+  .pillars {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .skills {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .skill {
+    padding: 14px 12px;
+    min-height: 124px;
+    border-radius: 18px;
+  }
+
+  .skill-ico {
+    width: 38px;
+    height: 38px;
+  }
+
+  .skill-ico svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .skill h3 {
+    font-size: 13.5px;
+    margin: 10px 0 2px;
+  }
+
+  .skill small {
+    font-size: 10.5px;
+  }
+
+  .timeline {
+    padding-left: 20px;
+    margin-top: 32px;
+  }
+
+  .job::before {
+    left: -26px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .job h3 {
+    font-size: 24px;
+  }
+
+  .projects {
+    gap: 16px;
+    margin-top: 26px;
+  }
+
+  .project {
+    min-height: 420px;
+    border-radius: 22px;
+  }
+
+  .project-body {
+    padding: 20px 16px;
+  }
+
+  .num {
+    font-size: 44px;
+  }
+
+  .project h3 {
+    font-size: clamp(1.8rem, 6vw, 2.3rem);
+  }
+
+  .project p {
+    font-size: 13.5px;
+    margin-bottom: 12px;
+  }
+
+  .github-banner {
+    padding: 20px 16px;
+    border-radius: 22px;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .github-banner strong {
+    font-size: clamp(1.35rem, 5.5vw, 2rem);
+  }
+
+  .github-banner p {
+    font-size: 13px;
+  }
+
   .contacts {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
 
-  .section {
-    padding: 88px 18px;
+  .contact {
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .contact b {
+    font-size: 14.5px;
+  }
+
+  .foot {
+    padding: 24px 16px 36px;
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .top-btn {
+    right: 14px;
+    bottom: 14px;
+    width: 42px;
+    height: 42px;
+  }
+
+  .nav-inner {
+    padding: 0 16px;
+    height: 64px;
   }
 }
 
-@media (pointer: coarse) {
+@media (max-width: 400px) {
+  .display {
+    font-size: clamp(2rem, 10vw, 2.7rem);
+  }
+
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .lang-btn {
+    padding: 0 8px;
+    font-size: 10px;
+    height: 32px;
+  }
+
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .skills {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .skill {
+    padding: 12px 10px;
+    min-height: 114px;
+  }
+
+  .skill-ico svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .stat-grid {
+    gap: 8px;
+  }
+
+  .stat {
+    padding: 12px 10px;
+    min-height: 100px;
+  }
+
+  .stat b {
+    font-size: 28px;
+  }
+
+  .stat span {
+    font-size: 9.5px;
+  }
+}
+
+@media (pointer: coarse), (hover: none) {
   .cursor-glow {
     display: none;
+  }
+
+  .project {
+    transform: none !important;
+  }
+
+  .skill:hover,
+  .contact:hover,
+  .btn:hover {
+    transform: none;
   }
 }
 

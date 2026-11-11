@@ -15,6 +15,8 @@ import {
   CheckCircle2,
   ArrowUp,
   Send,
+  Menu,
+  X,
 } from "lucide-react";
 import { TRANSLATIONS } from "./translations";
 import {
@@ -210,8 +212,9 @@ function Reveal({ children, className = "", delay = 0 }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
+    if (reduce || !window.IntersectionObserver) {
       setVisible(true);
       return;
     }
@@ -224,7 +227,7 @@ function Reveal({ children, className = "", delay = 0 }) {
           obs.disconnect();
         }
       },
-      { threshold: 0.12 },
+      { threshold: 0.02, rootMargin: "0px 0px -20px 0px" },
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -236,8 +239,8 @@ function Reveal({ children, className = "", delay = 0 }) {
       className={className}
       style={{
         opacity: visible ? 1 : 0,
-        transform: visible ? "none" : "translateY(28px)",
-        transition: `opacity .8s cubic-bezier(.22,1,.36,1) ${delay}ms, transform .8s cubic-bezier(.22,1,.36,1) ${delay}ms`,
+        transform: visible ? "none" : "translateY(24px)",
+        transition: `opacity .7s cubic-bezier(.22,1,.36,1) ${delay}ms, transform .7s cubic-bezier(.22,1,.36,1) ${delay}ms`,
       }}
     >
       {children}
@@ -289,7 +292,9 @@ export default function App() {
 
   const scrollTo = (id) => {
     setMobileOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    window.setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }, 15);
   };
 
   useEffect(() => {
@@ -353,7 +358,7 @@ export default function App() {
       <div className="progress" style={{ width: `${progress}%` }} />
 
       <div className="shell">
-        <header className={`nav ${scrolled ? "scrolled" : ""}`}>
+        <header className={`nav ${scrolled || mobileOpen ? "scrolled is-open" : ""}`}>
           <div className="nav-inner">
             <button className="logo" onClick={() => scrollTo("Hero")}>
               <span className="mark">BT</span>
@@ -408,18 +413,37 @@ export default function App() {
                 <Send size={15} />
                 Telegram
               </a>
-              <button className="icon-btn mobile-only" onClick={() => setMobileOpen((v) => !v)} aria-label="Menu">
-                <span style={{ fontSize: 16, lineHeight: 1 }}>{mobileOpen ? "×" : "☰"}</span>
+              <button
+                className="icon-btn mobile-only"
+                onClick={() => setMobileOpen((v) => !v)}
+                aria-label="Menu"
+              >
+                {mobileOpen ? <X size={18} /> : <Menu size={18} />}
               </button>
             </div>
           </div>
           {mobileOpen && (
             <div className="mobile-panel">
               {NAV_KEYS.map((key) => (
-                <button key={key} data-active={activeSection === key} onClick={() => scrollTo(key)}>
-                  {t.nav[key]}
+                <button
+                  key={key}
+                  data-active={activeSection === key}
+                  onClick={() => scrollTo(key)}
+                >
+                  <span>{t.nav[key]}</span>
+                  <ArrowRight size={14} style={{ opacity: activeSection === key ? 1 : 0.35 }} />
                 </button>
               ))}
+              <a
+                className="mobile-panel-cta"
+                href="https://t.me/BBB7I2"
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setMobileOpen(false)}
+              >
+                <Send size={15} />
+                Telegram
+              </a>
             </div>
           )}
         </header>
@@ -739,6 +763,7 @@ export default function App() {
 function ProjectCard({ project, index, liveLabel }) {
   const ref = useRef(null);
   const onMove = useCallback((e) => {
+    if (typeof window !== "undefined" && window.matchMedia("(hover: none)").matches) return;
     const card = ref.current;
     if (!card) return;
     const r = card.getBoundingClientRect();
