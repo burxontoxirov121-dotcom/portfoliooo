@@ -15,6 +15,7 @@ export const TRANSLATIONS = {
       titleLastName: "Toxirov",
       subtitle: "Frontend Dasturchi & UI Specialist",
       desc: "React va Tailwind CSS yordamida chiroyli, moslashuvchan va zamonaviy veb-ilovalarni yaratish. G'oyalarni premium raqamli tajribalarga aylantiraman.",
+      location: "Toshkent, O'zbekiston",
       viewProjects: "Loyihalarni ko'rish",
       contactMe: "Bog'lanish",
       scroll: "Pastga suring",
@@ -63,7 +64,7 @@ export const TRANSLATIONS = {
       tag: "Tajriba",
       title1: "O'rganish",
       title2: "Yo'li",
-      duration: "1 Yil",
+      duration: "3 Yil",
       status: "Hozirda",
       school: "Mars IT School",
       role: "O'quvchi · Frontend Dasturlash",
@@ -77,8 +78,18 @@ export const TRANSLATIONS = {
       source: "Manba kodi",
       copiedToast: "Bu mening rasmiy portfoliom!",
       items: {
+        Zolvi: {
+          name: "Zolvi",
+          desc: "Biznes operatsiyalarini tartibga soluvchi platforma. CRM, ERP, avtomatlashtirish va AI yordamida sochilgan jadvallar, qo'ng'iroqlar va qog'oz yozuvlar bitta ishlaydigan tizimga aylanadi.",
+          badge: "Asosiy loyiha",
+        },
+        Formo: {
+          name: "Formo",
+          desc: "O'z sport formangizni yarating: ism, raqam, rang, shrift va logo. Dizayn sexga yuboriladi, tayyor futbolka va shortik esa manzilingizgacha yetkaziladi.",
+          badge: "Asosiy loyiha",
+        },
         "Weather APP": {
-          name: "Weather APP",
+          name: "Weather App",
           desc: "Real vaqt rejimida dunyo shaharlaridagi ob-havo ma'lumotlarini ko'rsatuvchi zamonaviy veb-dastur.",
           badge: "Live API",
         },
@@ -88,7 +99,7 @@ export const TRANSLATIONS = {
           badge: "Student Platform 🎓",
         },
         "Currency convertor": {
-          name: "Currency convertor",
+          name: "Currency Converter",
           desc: "Real vaqtdagi valyuta kurslari yordamida valyutani tezkor almashtirish imkonini beruvchi dastur. React va Tailwind CSS yordamida yaratilgan.",
           badge: "React + API",
         },
@@ -104,6 +115,8 @@ export const TRANSLATIONS = {
       title1: "Men bilan",
       title2: "Bog'laning",
       desc: "Hamkorlik, takliflar yoki shunchaki do'stona suhbat uchun bemalol bog'lanishingiz mumkin.",
+      githubDesc: "Repozitoriyalar, kod va yangi loyihalar — hammasi shu profil ichida.",
+      githubAction: "Profilni ochish",
       copiedToast: "Nusxalandi!",
       labels: {
         Phone: "Telefon",
@@ -135,6 +148,7 @@ export const TRANSLATIONS = {
       titleLastName: "Toxirov",
       subtitle: "Frontend-разработчик & UI Специалист",
       desc: "Создание красивых, адаптивных и современных веб-приложений с использованием React и Tailwind CSS. Превращаю идеи в премиальные цифровые решения.",
+      location: "Ташкент, Узбекистан",
       viewProjects: "Смотреть проекты",
       contactMe: "Связаться со мной",
       scroll: "Прокрутите вниз",
@@ -155,7 +169,7 @@ export const TRANSLATIONS = {
       ],
       stats: {
         yearsOld: "Лет",
-        yearExperience: "Год опыта",
+        yearExperience: "Года опыта",
         technologies: "Технологии",
         projectsBuilt: "Создано проектов",
       },
@@ -183,7 +197,7 @@ export const TRANSLATIONS = {
       tag: "Опыт",
       title1: "Путь",
       title2: "Обучения",
-      duration: "1 Год",
+      duration: "3 Года",
       status: "Настоящее время",
       school: "Mars IT School",
       role: "Студент · Frontend-разработка",
@@ -197,8 +211,18 @@ export const TRANSLATIONS = {
       source: "Исходный код",
       copiedToast: "Это мой официальный сайт!",
       items: {
+        Zolvi: {
+          name: "Zolvi",
+          desc: "Платформа для порядка в бизнесе. CRM, ERP, автоматизация и AI превращают разрозненные таблицы, звонки и бумажные заметки в одну рабочую систему.",
+          badge: "Главный проект",
+        },
+        Formo: {
+          name: "Formo",
+          desc: "Создайте свою спортивную форму: имя, номер, цвет, шрифт и логотип. Дизайн уходит в цех, готовые футболка и шорты доставляются до двери.",
+          badge: "Главный проект",
+        },
         "Weather APP": {
-          name: "Weather APP",
+          name: "Weather App",
           desc: "Современное веб-приложение для отображения погоды в городах мира в реальном времени.",
           badge: "Live API",
         },
@@ -208,7 +232,7 @@ export const TRANSLATIONS = {
           badge: "Student Platform 🎓",
         },
         "Currency convertor": {
-          name: "Currency convertor",
+          name: "Currency Converter",
           desc: "Приложение для мгновенной конвертации валют по актуальным курсам обмена. Создано на React и Tailwind CSS.",
           badge: "React + API",
         },
@@ -224,6 +248,8 @@ export const TRANSLATIONS = {
       title1: "Давайте",
       title2: "Свяжемся",
       desc: "Не стесняйтесь обращаться для сотрудничества, новых возможностей или просто дружеского общения.",
+      githubDesc: "Репозитории, код и новые проекты — всё в этом профиле.",
+      githubAction: "Открыть профиль",
       copiedToast: "Скопировано!",
       labels: {
         Phone: "Телефон",
@@ -255,6 +281,7 @@ export const TRANSLATIONS = {
       titleLastName: "Toxirov",
       subtitle: "Frontend Developer & UI Specialist",
       desc: "Building beautiful, responsive, and modern web applications with React and Tailwind CSS. Turning ideas into premium digital experiences.",
+      location: "Tashkent, Uzbekistan",
       viewProjects: "View Projects",
       contactMe: "Contact Me",
       scroll: "Scroll",
@@ -275,7 +302,7 @@ export const TRANSLATIONS = {
       ],
       stats: {
         yearsOld: "Years Old",
-        yearExperience: "Year Experience",
+        yearExperience: "Years Experience",
         technologies: "Technologies",
         projectsBuilt: "Projects Built",
       },
@@ -303,7 +330,7 @@ export const TRANSLATIONS = {
       tag: "Experience",
       title1: "Learning",
       title2: "Journey",
-      duration: "1 Year",
+      duration: "3 Years",
       status: "Present",
       school: "Mars IT School",
       role: "Student · Frontend Development",
@@ -317,8 +344,18 @@ export const TRANSLATIONS = {
       source: "Source",
       copiedToast: "This is my official portfolio!",
       items: {
+        Zolvi: {
+          name: "Zolvi",
+          desc: "An operations platform that turns scattered spreadsheets, missed calls and paper notes into one system — CRM, ERP, automation and AI built around how a business actually runs.",
+          badge: "Featured",
+        },
+        Formo: {
+          name: "Formo",
+          desc: "Design your own sports kit: name, number, color, type and logo. The design goes to the workshop, and the finished shirt and shorts are delivered to your door.",
+          badge: "Featured",
+        },
         "Weather APP": {
-          name: "Weather APP",
+          name: "Weather App",
           desc: "Modern web application displaying real-time weather forecasts for global cities.",
           badge: "Live API",
         },
@@ -328,7 +365,7 @@ export const TRANSLATIONS = {
           badge: "Student Platform 🎓",
         },
         "Currency convertor": {
-          name: "Currency convertor",
+          name: "Currency Converter",
           desc: "A responsive and modern Currency Converter application that allows users to convert currencies instantly using real-time exchange rates.",
           badge: "React + API",
         },
@@ -344,6 +381,8 @@ export const TRANSLATIONS = {
       title1: "Let's",
       title2: "Connect",
       desc: "Feel free to reach out for collaborations, opportunities, or just a friendly conversation.",
+      githubDesc: "Repositories, code and new work — all in one profile.",
+      githubAction: "Open profile",
       copiedToast: "Copied!",
       labels: {
         Phone: "Phone",
